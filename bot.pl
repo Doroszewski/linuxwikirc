@@ -61,5 +61,5 @@ sub udp_handler {
   #$msg =~ s/index\.php\?oldid=(\d*)&rcid=(\d*)/d\/$1\/$2/g;
   #$msg =~ s/index\.php\?diff=(\d*)&oldid=\d*&rcid=(\d*)/d\/$1\/$2/g;
   #$ignore = 1 if ($msg =~ /S:Log\/patrol/);
-  $irc->send_msg(PRIVMSG => '#linuxwiki.pl', $msg);  #unless ($ignore);
+  $irc->send_msg(PRIVMSG => $channel, $msg);  #unless ($ignore);
 }
