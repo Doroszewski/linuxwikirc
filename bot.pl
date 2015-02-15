@@ -32,7 +32,11 @@ my $udp_server = AnyEvent::Handle::UDP->new(
 my $irc = AnyEvent::IRC::Client->new;
 $irc->reg_cb(registered => sub {
   say "Connected.";
-  $irc->send_msg(NS => "ID $ns_password");
+  unless ($irc->is_my_nick($nick)) {
+    $irc->send_msg(NS => "REGAIN $nick $ns_password");
+  } else {
+    $irc->send_msg(NS => "ID $ns_password");
+  }
   $irc->send_msg(JOIN => $channel);
 });
 $irc->reg_cb(disconnect => sub {
